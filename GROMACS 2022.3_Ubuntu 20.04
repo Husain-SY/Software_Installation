@@ -40,4 +40,5 @@ sudo gedit ~./bashrc
 #GROMACS PATH
 source /usr/local/gromacs/bin/GMXRC
 #GROMACS PATH
-*Save the file and exit the terminal
+*Save and close the file
+*Exit the terminal
