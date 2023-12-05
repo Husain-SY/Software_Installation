@@ -1,0 +1,43 @@
+------INSTALL UBUNTU-------
+Download Ubuntu 20.04 ISO
+Flash using Rufus
+
+---------------------------------------------------PRE INSTALLATION GROMACS 2022.3------------------------------------------------------------
+#############*Prerequisite*##############
+sudo apt update
+sudo apt upgrade
+sudo apt install gcc
+sudo apt install cmake
+sudo apt install build-essential
+sudo apt install libfftw3-dev 
+OR
+sudo apt-get install -y libfftw3-dev
+
+###################################################*Cuda toolkit 11.8 Installation*#########################################################
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda-repo-ubuntu2004-11-8-local_11.8.0-520.61.05-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu2004-11-8-local_11.8.0-520.61.05-1_amd64.deb
+sudo cp /var/cuda-repo-ubuntu2004-11-8-local/cuda-(*your number here*)-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+sudo apt-get -y install cuda
+
+--------------------INSTALLATION GROMACS 2022.3-----------------------
+*Download Gromacs 2022.3 from internet and save in Downloads directory
+cd Downloads
+tar xfz gromacs-2022.3.tar.gz
+cd gromacs-2022.3
+mkdir build
+cd build
+cmake .. -DGMX_GPU=CUDA -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda
+make
+make check
+sudo make install
+
+----POST GROMACS 2022.3 INSTALLATION----
+sudo gedit ~./bashrc
+*At the end of the file add the following
+#GROMACS PATH
+source /usr/local/gromacs/bin/GMXRC
+#GROMACS PATH
+*Save the file and exit the terminal
